@@ -429,7 +429,7 @@ function renderBrokers(){
   $('#regionFilter').innerHTML=RF.map(r=>`<button type="button" data-rf="${r}" aria-pressed="${r===rfilter}">${r}</button>`).join('');
   const list=B.filter(b=>rfilter==="All"||b.regions.includes(rfilter)||b.regions.includes("Global")).sort((a,b)=>b[level]-a[level]);
   const ranked=[...B].sort((a,b)=>b[level]-a[level]).map(b=>b.id);
-  $('#brokerList').innerHTML=list.length?list.map(b=>{const pos=ranked.indexOf(b.id)+1; return `<div class="bcard ${pos<=3?'top3':''}">
+  $('#brokerList').innerHTML=list.length?list.map((b,i)=>{const pos=i+1; return `<div class="bcard ${pos<=3?'top3':''}">
     <div class="pos num">${pos}</div>
     <div style="min-width:0"><h3>${logo(b)}${esc(b.name)} <span class="fit">${level==="beginner"?"New investors":"Experienced"} score ${b[level].toFixed(1)}/5</span></h3>
       <div class="scorebar" style="margin-top:8px"><div class="meter"><i style="width:${b[level]/5*100}%"></i></div></div>
